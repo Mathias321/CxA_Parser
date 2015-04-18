@@ -14,6 +14,13 @@ class CadstarArcObj(object):
         self.attr = []
         self.parent = parent
         self.ref = ""
+
+        for pos_attr in self.DICT_POSATTR:
+            setattr(self, pos_attr, "")
+        for attr in self.DICT_ATTR:
+            setattr(self, attr, None)
+        for col in self.DICT_COLLECTION.values():
+            setattr(self, col, {})
         
     def __str__(self):
         return self.get_short_name()
@@ -32,6 +39,7 @@ class CadstarArcObj(object):
                 if isinstance(attr, cls):
                     setattr(self, dest_attr, attr)
             for cls, col in self.DICT_COLLECTION.items():
+                # print (str(cls))
                 if isinstance(attr, cls):
                     # print(str(self), str(col), str(attr.ref), str(attr))
                     getattr(self, col)[attr.ref] = attr
