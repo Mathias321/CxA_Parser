@@ -1,6 +1,10 @@
 from CadstarArcObj import *
 import SHAPE
-
+import PT
+import CWSEMI
+import ACWSEMI
+import CWARC
+import ACWARC
 
     # (FIGURE FIG30 LC5 NO_SHEET
     #     (OUTLINE (PT 50609500 26670000) (PT 50736500 26670000) (PT 50736500 26924000) (PT 50609500 26924000) (PT 50609500 26670000))
@@ -29,12 +33,12 @@ class SHAPE(CadstarArcObj):
     CAO_keyword = ""
     DICT_POSATTR = []
     DICT_ATTR = {}
-    DICT_COLLECTION = {PT.PT : "points"}
+    DICT_COLLECTION = {PT.PT : "points",
+                       CWSEMI.CWSEMI : "cwsemi",
+                       ACWSEMI.ACWSEMI : "acwsemi",
+                       CWARC.CWARC : "cwarc",
+                       ACWARC.ACWARC : "acwarc"}
 
-    def __init__(self, parent):
-        self.attr = []
-        self.parent = parent
-        self.points = {}
 
 class SOLID(SHAPE):
     CAO_keyword = "SOLID"

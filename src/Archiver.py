@@ -1,7 +1,11 @@
+import os
+import re
 from CadstarArcObj import *
 
-FILE = "G:\\IDQ\\Python_CadStar_Archive_Parser\\CC1111_USB_Dongle_Johanson_1_0.csa"
-FILEOUT = "G:\\IDQ\Python_CadStar_Archive_Parser\\mine.csa"
+# Just for debug ease, make constants for input and output files
+CURDIR = os.path.dirname(os.path.abspath(__file__))
+FILE = CURDIR + "\\..\\examples\\CC1111_USB_Dongle_Johanson_1_0.csa"
+FILEOUT = CURDIR + "\\..\\examples\\mine.csa"
 
 
 class Archive(object):
