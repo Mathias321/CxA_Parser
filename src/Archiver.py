@@ -4,7 +4,7 @@ from CadstarArcObj import *
 
 # Just for debug ease, make constants for input and output files
 CURDIR = os.path.dirname(os.path.abspath(__file__))
-FILE = CURDIR + "\\..\\examples\\CC1111_USB_Dongle_Johanson_1_0.csa"
+FILE = CURDIR + "\\..\\examples\\symbol.csa"
 FILEOUT = CURDIR + "\\..\\examples\\mine.csa"
 
 
@@ -19,9 +19,12 @@ class Archive(object):
     def readFromFile(self, file=FILE):
         f = open(file)
         text = f.read()
-        text = re.sub(r"\s+", " ", text)
         text = re.sub(r"\n+", "", text)
-        l = re.split('("[^"]*"|[\(\)\s])', text)
+            # Some comments about the following regexp:
+            # So, it splits the input string with '(', ')', space or quoted strings ->  (".*"|[\(\)\s])
+            #  but it ignores separators within quoted strings (embraced by '"')   -> (".*?"|...) (lazy match)
+            #   and it takes care not to take account of quotes precedent by '\'   -> (?<!\\)" (negative lookbehind)
+        l = re.split(r'((?<!\\)".*?(?<!\\)"|[\(\)\s])', text)
         l = [x for x in l if x != " " and x != ""]
         self.l = l
 
