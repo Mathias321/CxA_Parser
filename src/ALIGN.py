@@ -1,7 +1,4 @@
 from CadstarArcObj import *
-from ALIGN import *
-from JUSTIFICATION import *
-
 
    # (TEXTLOC SYMBOL_NAME TC4 (PT 43942000 63373000))
    # (TEXTLOC PART_NAME TC4 (PT 43942000 57531000)
@@ -13,10 +10,10 @@ from JUSTIFICATION import *
    #  (JUSTIFICATION RIGHT)
    # )
 
-class TEXTLOC(CadstarArcObj):
-    CAO_keyword = "TEXTLOC"
-    DICT_POSATTR = ["ref", "textCode", "point"]
-    DICT_ATTR = {ALIGN : "alignment",
-                 JUSTIFICATION : "justification"}
+class ALIGN(CadstarArcObj):
+    CAO_keyword = "ALIGN"
+    POSSIBLE_VALUES = ('TOPRIGHT', 'TOPCENTER', 'TOPLEFT',
+                       'CENTERRIGHT', 'CENTER', 'CENTERLEFT',
+                       'BOTTOMRIGHT', 'BOTTOMCENTER', 'BOTTOMLEFT')
 
-CadstarArcObj.register_sub_class(TEXTLOC)
+CadstarArcObj.register_sub_class(ALIGN)
