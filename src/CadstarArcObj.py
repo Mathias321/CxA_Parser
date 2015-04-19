@@ -17,7 +17,7 @@ class CadstarArcObj(object):
 
         for pos_attr in self.DICT_POSATTR:
             setattr(self, pos_attr, "")
-        for attr in self.DICT_ATTR:
+        for attr in self.DICT_ATTR.values():
             setattr(self, attr, None)
         for col in self.DICT_COLLECTION.values():
             setattr(self, col, {})
@@ -74,14 +74,20 @@ class CadstarArcObj(object):
             print("\n" + " " * indent + "(" + str(self), end="", file=file)
         else:
             print(" (" + str(self), end="", file=file)
-        for a in self.attr:
+        for i, a in enumerate(self.attr):
             if isinstance(a, str):
+                if (i != 0 and i % 10 == 0):
+                    print ("\n" + " " * (indent + 1), end="", file=file)
+                    has_child = True
                 print(" " + a, end="", file=file)
             else:
                 if a.is_considered_as_child():
                     has_child = True
                     a.dump(indent + 1, file=file)
                 else:
+                    if (i != 0 and i % 10 == 0):
+                        print ("\n" + " " * (indent + 1), end="", file=file)
+                        has_child = True
                     a.dump(indent, file=file, child=False)
         if has_child:
             print("\n" + " " * indent + ")", end="", file=file)

@@ -54,6 +54,7 @@ class Archive(object):
         else:
             f = open(file, "w")
             mySch.mainObj.dump(file=f)
+            print("\n", file=f)
             f.close()
 
 
