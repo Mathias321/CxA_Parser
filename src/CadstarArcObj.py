@@ -31,6 +31,7 @@ class CadstarArcObj(object):
     def update_attr(self):
         # Store positional attributes into specific attributes
         for index, dest_attr in enumerate(self.DICT_POSATTR):
+            # print (str(dest_attr), index, self.attr[index])
             setattr(self, dest_attr, self.attr[index])
 
         # Store typed attributes into specific attributes
@@ -96,3 +97,4 @@ class CadstarArcObj(object):
 
 from symdef import SYMDEF
 from LIBRARY import LIBRARY
+from ASSIGNMENTS import *
