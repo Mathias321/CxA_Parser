@@ -77,4 +77,4 @@ mySch.read_from_file()
 
 mySch.classify()
 mySch.dump(FILEOUT)
-
+mySch.mainObj.attr[3].symbols['L0'].check_pins_on_grid(2540)
