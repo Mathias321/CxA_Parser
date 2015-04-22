@@ -9,10 +9,11 @@ class CadstarArcObj(object):
 
     subclasses = {}
 
-    def __init__(self, parent):
+    def __init__(self, parent, root):
         # self.children = []
         self.attr = []
         self.parent = parent
+        self.root = root
         self.ref = ""
 
         for pos_attr in self.DICT_POSATTR:
@@ -48,7 +49,8 @@ class CadstarArcObj(object):
     def has_attributes(self):
         return len(self.attr) != 0
 
-    def is_considered_as_child(self):
+    @staticmethod
+    def is_considered_as_child():
         return True
     
     @classmethod
@@ -77,8 +79,8 @@ class CadstarArcObj(object):
             print(" (" + str(self), end="", file=file)
         for i, a in enumerate(self.attr):
             if isinstance(a, str):
-                if (i != 0 and i % 10 == 0):
-                    print ("\n" + " " * (indent + 1), end="", file=file)
+                if i != 0 and i % 10 == 0:
+                    print("\n" + " " * (indent + 1), end="", file=file)
                     has_child = True
                 print(" " + a, end="", file=file)
             else:
@@ -86,8 +88,8 @@ class CadstarArcObj(object):
                     has_child = True
                     a.dump(indent + 1, file=file)
                 else:
-                    if (i != 0 and i % 10 == 0):
-                        print ("\n" + " " * (indent + 1), end="", file=file)
+                    if i != 0 and i % 10 == 0:
+                        print("\n" + " " * (indent + 1), end="", file=file)
                         has_child = True
                     a.dump(indent, file=file, child=False)
         if has_child:

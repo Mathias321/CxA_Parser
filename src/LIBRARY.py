@@ -8,10 +8,5 @@ class LIBRARY(CadstarArcObj):
     DICT_ATTR = {}
     DICT_COLLECTION = {symdef.SYMDEF: "symbols"}
 
-    def __init__(self, parent):
-        self.attr = []
-        self.parent = parent
-        
-        self.symbols = {}
   
 CadstarArcObj.register_sub_class(LIBRARY)

@@ -20,20 +20,5 @@ class SYMDEF(CadstarArcObj):
                        PINLABELLOC.PINLABELLOC: "pinLabelLocs",
                        PINNUMNAMELOC.PINNUMNAMELOC: "pinNumNameLocs"}
 
-    def __init__(self, parent):
-        self.attr = []
-        self.parent = parent
-        
-        self.ref = ""
-        self.name = ""
-        self.altName = ""
-        self.origin = PT.PT(self)
-        self.version = 0
-        self.figures = {}
-        self.texts = {}
-        self.terminals = {}
-        self.textLocs = {}
-        self.pinLabelLocs = {}
-        self.pinNumNameLocs = {}
 
 CadstarArcObj.register_sub_class(SYMDEF)
