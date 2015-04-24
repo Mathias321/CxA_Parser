@@ -76,5 +76,12 @@ mySch = Archive()
 mySch.read_from_file()
 
 mySch.classify()
+
+print("checking symbols' pins alignement on grid")
+for sym in mySch.mainObj.attr[3].symbols.values():
+    pins = sym.check_pins_on_grid(grid_step=2540, correct=True)
+    if len(pins) != 0:
+        print(sym.name, pins)
+
+print("dumping file")
 mySch.dump(FILEOUT)
-mySch.mainObj.attr[3].symbols['L0'].check_pins_on_grid(2540)

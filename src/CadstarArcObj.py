@@ -1,5 +1,5 @@
 import sys
-
+import TEXT_ATTR
 
 class CadstarArcObj(object):
     CAO_keyword = ""
@@ -27,7 +27,10 @@ class CadstarArcObj(object):
         return self.get_short_name()
 
     def add_attr(self, obj):
-        self.attr.append(obj)
+        if isinstance(obj, str):
+            self.attr.append(TEXT_ATTR.TEXT_ATTR(obj))
+        else:
+            self.attr.append(obj)
 
     def update_attr(self):
         # Store positional attributes into specific attributes
@@ -78,11 +81,11 @@ class CadstarArcObj(object):
         else:
             print(" (" + str(self), end="", file=file)
         for i, a in enumerate(self.attr):
-            if isinstance(a, str):
+            if isinstance(a, TEXT_ATTR.TEXT_ATTR):
                 if i != 0 and i % 10 == 0:
                     print("\n" + " " * (indent + 1), end="", file=file)
                     has_child = True
-                print(" " + a, end="", file=file)
+                print(" " + str(a), end="", file=file)
             else:
                 if a.is_considered_as_child():
                     has_child = True

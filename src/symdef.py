@@ -19,17 +19,22 @@ class SYMDEF(CadstarArcObj):
                        PINLABELLOC.PINLABELLOC: "pinLabelLocs",
                        PINNUMNAMELOC.PINNUMNAMELOC: "pinNumNameLocs"}
 
-    def check_pins_on_grid(self, grid_step):
-        all_ok = True
+    def check_pins_on_grid(self, grid_step=2540, correct=False):
+        list_of_wrong_pins = []
         for pin in self.terminals.values():
-            dx = int(self.origin.x) - int(pin.position.x)
+            dx = self.origin.x - pin.position.x
             if dx % grid_step != 0:
-                print(pin.ref, self.origin.x, pin.position.x)
-                all_ok = False
-            dy = int(self.origin.y) - int(pin.position.y)
+                list_of_wrong_pins.append(pin.ref)
+                if correct:
+                    print(dx, self.origin.x, (dx / grid_step), pin.position.x)
+                    pin.position.x.text = str(self.origin.x - round(dx / grid_step) * grid_step)
+                    print("changing positon x to : " + str(pin.position.x))
+            dy = self.origin.y - pin.position.y
             if dy % grid_step != 0:
-                print(pin.ref, self.origin.y, pin.position.y)
-                all_ok = False
-        return all_ok
+                list_of_wrong_pins.append(pin.ref)
+                if correct:
+                    pin.position.y.text = str(self.origin.y - round(dy / grid_step) * grid_step)
+                    print("changing positon y to : " + str(pin.position.y))
+        return list_of_wrong_pins
 
 CadstarArcObj.register_sub_class(SYMDEF)
